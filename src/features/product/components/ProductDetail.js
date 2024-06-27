@@ -12,7 +12,7 @@ import { addToCartAsync, selectItems } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { useAlert } from 'react-alert';
 import { Grid } from 'react-loader-spinner';
-
+import { discountedPriceProduct } from '../../../common';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -155,7 +155,7 @@ export default function ProductDetail() {
                 ${product.price}
               </p>
               <p className="text-3xl tracking-tight text-gray-900">
-                ${product.discountPrice}
+                ${discountedPriceProduct(product).toFixed(2)}
               </p>
 
               {/* Reviews */}

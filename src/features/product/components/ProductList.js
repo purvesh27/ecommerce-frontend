@@ -59,6 +59,7 @@ export default function ProductList() {
     },
   ];
 
+
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -108,6 +109,7 @@ export default function ProductList() {
     dispatch(fetchBrandsAsync());
     dispatch(fetchCategoriesAsync());
   }, []);
+
 
   return (
     <div className="bg-white">
@@ -396,6 +398,10 @@ function DesktopFilter({ handleFilter, filters }) {
 }
 
 function ProductGrid({ products, status }) {
+  const discountedPrice = (product) => {
+    const finalPrice = ((100 - product.discountPercentage) / 100) * product.price;
+    return finalPrice;
+  }
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
@@ -437,7 +443,7 @@ function ProductGrid({ products, status }) {
                   </div>
                   <div>
                     <p className="text-sm block font-medium text-gray-900">
-                      ${product.discountPrice}
+                      ${discountedPrice(product).toFixed(2)}
                     </p>
                     <p className="text-sm block line-through font-medium text-gray-400">
                       ${product.price}
